@@ -8,7 +8,7 @@ import re
 
 from scrapy import Request
 from scrapy.pipelines.images import ImagesPipeline
-
+# from
 
 class PicPipeline(ImagesPipeline):
     cookies = {
