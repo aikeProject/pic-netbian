@@ -43,6 +43,7 @@ class PicNetbianSpider(scrapy.Spider):
         # 获取分类
         classify = response.css('#main > div.classify a')
         for sify in classify:
+            # 分类页对应的url
             sify_href = self.domain + sify.attrib['href']
             # 分类名
             sify_name = sify.css('::text').get()
@@ -76,7 +77,7 @@ class PicNetbianSpider(scrapy.Spider):
                     'sify_href': sify_href,
                 }
             )
-
+    # 解析每一页数据
     def parse_item(self, response):
         result = response.css('.slist ul li')
         sify_href = response.meta['sify_href']
