@@ -18,3 +18,5 @@ class PicItem(Item):
     sifyHref = Field()
     # 分类
     sifyName = Field()
+    # id
+    id = Field()

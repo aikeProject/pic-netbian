@@ -6,7 +6,7 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
+from pic.proxyPool.proxy import get_proxy
 
 class PicSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -55,7 +55,9 @@ class PicSpiderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-
+"""
+添加随机ip代理
+"""
 class PicDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
@@ -78,6 +80,13 @@ class PicDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+
+        # 获取爬去下来的免费代理ip
+        proxy = get_proxy()
+        print(proxy)
+        if proxy:
+            # request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
+            request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
         return None
 
     def process_response(self, request, response, spider):

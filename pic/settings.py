@@ -15,13 +15,21 @@ SPIDER_MODULES = ['pic.spiders']
 NEWSPIDER_MODULE = 'pic.spiders'
 
 # 图片存储位置
-IMAGES_STORE = 'D:\pic-netbian'
+IMAGES_STORE = 'D:\py'
+
+# download_delay = 3
+# 请求延迟
+# DOWNLOAD_DELAY = 3
+
+# mongodb
+MONGO_URI = 'localhost'
+MONGO_DATABASE = 'netbian'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'pic (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -41,10 +49,10 @@ ROBOTSTXT_OBEY = True
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-# DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-# }
+DEFAULT_REQUEST_HEADERS = {
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'Accept-Language': 'en',
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -54,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'pic.middlewares.PicDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+   'pic.middlewares.PicDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -67,6 +75,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    # 存储到mongodb
+    'pic.pipelines.MongoPipeline': 200,
     # 图片下载的中间件
     'pic.pipelines.PicPipeline': 300,
 }

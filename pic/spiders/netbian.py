@@ -18,18 +18,18 @@ class PicNetbianSpider(scrapy.Spider):
     }
 
     cookies = {
-        '__cfduid': 'db1d046d01386264a48a1f8871276deb71551795808',
-        'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1551795811',
-        'yjs_id': '74b8ba017da09aeddd8b20ed18021308',
+        '__cfduid': 'dfe4cad6e8cd802496e52ebce437628811552023045',
+        'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046',
+        'yjs_id': 'c98f486fedc6a648e533fab476f2ea5d',
         'ctrl_time': 1,
-        'PHPSESSID': 'cdb42cc013d05a0701334818bdc73ff8',
+        'PHPSESSID': '359d8773dff8f0a7b776c0053d82fda1',
         'zkhanmlusername': '%B3%C9%D3%EA',
         'zkhanmluserid': '479261',
-        'zkhanmlgroupid': '1',
-        'zkhanmlrnd': 'tgCOOvuHDUhiEbFEAm1X',
-        'zkhanmlauth': '6f9d209428366009cfb399f561ee5774',
-        'security_session_verify': 'ffd2fd3a71cb24f6d9bcc6394b36b4b6',
-        'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1551801638'
+        'zkhanmlgroupid': '3',
+        'zkhanmlrnd': '9tbNtbC95r5we6lojpTV',
+        'zkhanmlauth': '5654075243395d2dc6040c1acec8f976',
+        'security_session_verify': '04dfe61423a2c545878c072346c670e5',
+        'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552023054'
     }
 
     def start_requests(self):
@@ -91,4 +91,5 @@ class PicNetbianSpider(scrapy.Spider):
             pic_item['downUrl'] = self.downloadUrl.format(id=id)
             pic_item['sifyHref'] = sify_href
             pic_item['sifyName'] = sify_name
+            pic_item['id'] = id
             yield pic_item
