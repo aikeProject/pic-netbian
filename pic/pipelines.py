@@ -9,22 +9,24 @@ import re
 
 from scrapy import Request
 from scrapy.pipelines.images import ImagesPipeline
+
+
 # from
 
 class PicPipeline(ImagesPipeline):
     cookies = {
         '__cfduid': 'dfe4cad6e8cd802496e52ebce437628811552023045',
-        'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046',
+        'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046,1552278580',
         'yjs_id': 'c98f486fedc6a648e533fab476f2ea5d',
         'ctrl_time': 1,
         'PHPSESSID': '359d8773dff8f0a7b776c0053d82fda1',
         'zkhanmlusername': '%B3%C9%D3%EA',
         'zkhanmluserid': '479261',
         'zkhanmlgroupid': '3',
-        'zkhanmlrnd': '9tbNtbC95r5we6lojpTV',
-        'zkhanmlauth': '5654075243395d2dc6040c1acec8f976',
-        'security_session_verify': '04dfe61423a2c545878c072346c670e5',
-        'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552023054'
+        'zkhanmlrnd': 'Tu5P7keCmYDM2drWPqph',
+        'zkhanmlauth': '5ed08d4b4e208c6de012dd282ca92594',
+        'security_session_verify': 'f4e623de9fefb0013ca72e8161d5b364',
+        'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552280282'
     }
 
     def get_media_requests(self, item, info):
@@ -47,9 +49,10 @@ class PicPipeline(ImagesPipeline):
         filename = '{0}/{1}.jpg'.format(name, image_guid)
         return filename
 
-    def get_images(self, response, request, info):
-        print('images---')
-        pass
+    # def get_images(self, response, request, info):
+    #     print('images---')
+    #     pass
+
 
 # mongodb
 class MongoPipeline(object):

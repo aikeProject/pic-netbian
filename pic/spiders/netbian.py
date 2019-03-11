@@ -45,7 +45,7 @@ class PicNetbianSpider(scrapy.Spider):
             sify_name = sify.css('::text').get()
             yield scrapy.Request(
                 url=sify_href,
-                cookies=self.cookies,
+                # cookies=self.cookies,
                 callback=self.parse_item_sum,
                 meta={
                     'sify_name': sify_name,

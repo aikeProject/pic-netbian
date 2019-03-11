@@ -70,18 +70,17 @@ class PicDownloaderMiddleware(object):
     def __init__(self):
         self.cookies = {
             '__cfduid': 'dfe4cad6e8cd802496e52ebce437628811552023045',
+            'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046,1552278580',
             'yjs_id': 'c98f486fedc6a648e533fab476f2ea5d',
+            'ctrl_time': 1,
             'PHPSESSID': '359d8773dff8f0a7b776c0053d82fda1',
             'zkhanmlusername': '%B3%C9%D3%EA',
             'zkhanmluserid': '479261',
             'zkhanmlgroupid': '3',
             'zkhanmlrnd': 'Tu5P7keCmYDM2drWPqph',
             'zkhanmlauth': '5ed08d4b4e208c6de012dd282ca92594',
-            'ctrl_time': '1',
-            'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046,1552278580',
-            'zkhandownid23728': '1',
-            'security_session_verify': '066ce253c882c077bcc04e7bd6c21de8',
-            'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552278594'
+            'security_session_verify': 'f4e623de9fefb0013ca72e8161d5b364',
+            'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552280282'
         }
 
     @classmethod
@@ -95,6 +94,7 @@ class PicDownloaderMiddleware(object):
         # 获取爬去下来的免费代理ip
         proxy = get_proxy()
         print('proxy--', proxy)
+        # print('cookie--', self.cookies)
         if proxy:
             # request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
             request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
