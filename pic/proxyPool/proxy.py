@@ -17,9 +17,12 @@ def getHtml():
     # ....
     retry_count = 5
     proxy = get_proxy()
+    print('proxy: ', proxy)
     while retry_count > 0:
         try:
-            html = requests.get('https://www.example.com', proxies={"http": "http://{}".format(proxy)})
+            # html = requests.get('https://www.example.com', proxies={"http": "http://{}".format(proxy)})
+            # 代理请求检测
+            html = requests.get('http://httpbin.org/get', proxies={"http": "http://{}".format(proxy)})
             # 使用代理访问
             return html
         except Exception:
@@ -27,3 +30,7 @@ def getHtml():
     # 出错5次, 删除代理池中代理
     delete_proxy(proxy)
     return None
+
+if __name__ == '__main__':
+    # 代理请求检测
+    print(getHtml().text)

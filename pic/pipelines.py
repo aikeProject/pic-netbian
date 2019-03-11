@@ -29,8 +29,10 @@ class PicPipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
         # 循环每一张图片地址下载，若传过来的不是集合则无需循环直接yield
-        yield Request(item['downUrl'], cookies=self.cookies, meta={'name': item['sifyName']})
-        # yield Request(item['downUrl'], meta={'name': item['sifyName']})
+        try:
+            yield Request(item['downUrl'], cookies=self.cookies, meta={'name': item['sifyName']})
+        except:
+            print('又被封了...')
 
     # 重命名，若不重写这函数，图片名为哈希，就是一串乱七八糟的名字
     def file_path(self, request, response=None, info=None):
@@ -44,6 +46,10 @@ class PicPipeline(ImagesPipeline):
         # 分文件夹存储的关键：{0}对应着name；{1}对应着image_guid
         filename = '{0}/{1}.jpg'.format(name, image_guid)
         return filename
+
+    def get_images(self, response, request, info):
+        print('images---')
+        pass
 
 # mongodb
 class MongoPipeline(object):

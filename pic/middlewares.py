@@ -8,6 +8,7 @@
 from scrapy import signals
 from pic.proxyPool.proxy import get_proxy
 
+
 class PicSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -55,13 +56,33 @@ class PicSpiderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+
 """
-添加随机ip代理
+添加随机ip代理并且设置cookie
 """
+
+
 class PicDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
+
+    def __init__(self):
+        self.cookies = {
+            '__cfduid': 'dfe4cad6e8cd802496e52ebce437628811552023045',
+            'yjs_id': 'c98f486fedc6a648e533fab476f2ea5d',
+            'PHPSESSID': '359d8773dff8f0a7b776c0053d82fda1',
+            'zkhanmlusername': '%B3%C9%D3%EA',
+            'zkhanmluserid': '479261',
+            'zkhanmlgroupid': '3',
+            'zkhanmlrnd': 'Tu5P7keCmYDM2drWPqph',
+            'zkhanmlauth': '5ed08d4b4e208c6de012dd282ca92594',
+            'ctrl_time': '1',
+            'Hm_lvt_526caf4e20c21f06a4e9209712d6a20e': '1552023046,1552278580',
+            'zkhandownid23728': '1',
+            'security_session_verify': '066ce253c882c077bcc04e7bd6c21de8',
+            'Hm_lpvt_526caf4e20c21f06a4e9209712d6a20e': '1552278594'
+        }
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -71,23 +92,15 @@ class PicDownloaderMiddleware(object):
         return s
 
     def process_request(self, request, spider):
-        # Called for each request that goes through the downloader
-        # middleware.
-
-        # Must either:
-        # - return None: continue processing this request
-        # - or return a Response object
-        # - or return a Request object
-        # - or raise IgnoreRequest: process_exception() methods of
-        #   installed downloader middleware will be called
-
         # 获取爬去下来的免费代理ip
         proxy = get_proxy()
-        print(proxy)
+        print('proxy--', proxy)
         if proxy:
             # request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
             request.meta['proxy'] = "http://{proxy}".format(proxy=proxy)
-        return None
+
+        # 设置cookie
+        request.cookies = self.cookies
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
@@ -110,3 +123,16 @@ class PicDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+# 检测代理
+class ProxyMiddleware(object):
+    '''
+    设置Proxy
+    '''
+
+    def process_request(self, request, spider):
+        ip = get_proxy()
+        print('ip--', ip)
+        print('proxy--', "http://{proxy}".format(proxy=ip))
+        request.meta['proxy'] = "http://{proxy}".format(proxy=ip)

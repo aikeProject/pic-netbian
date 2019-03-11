@@ -15,7 +15,7 @@ SPIDER_MODULES = ['pic.spiders']
 NEWSPIDER_MODULE = 'pic.spiders'
 
 # 图片存储位置
-IMAGES_STORE = 'D:\py'
+IMAGES_STORE = 'D:\py\ptest'
 
 # download_delay = 3
 # 请求延迟
@@ -63,7 +63,11 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+    # 下载图片 ip代理 设置 cookie
    'pic.middlewares.PicDownloaderMiddleware': 543,
+
+    # 代理检测
+   # 'pic.middlewares.ProxyMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -76,7 +80,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 存储到mongodb
-    'pic.pipelines.MongoPipeline': 200,
+    # 'pic.pipelines.MongoPipeline': 200,
     # 图片下载的中间件
     'pic.pipelines.PicPipeline': 300,
 }
